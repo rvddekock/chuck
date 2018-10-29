@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent, DialogDataDialog} from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule, MatProgressSpinnerModule, MatButtonModule, MatCardModule, MatToolbarModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,11 @@ import { MatDialogModule } from '@angular/material';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule, 
+    MatProgressSpinnerModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule
   ],
   entryComponents: [
     DialogDataDialog
