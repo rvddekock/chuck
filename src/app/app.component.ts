@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChuckService } from "./chuck.service";
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,9 @@ export class AppComponent {
   title = 'chuck';
   public categories;
 
-  constructor(private _chuckService: ChuckService) {}
+  constructor(private _chuckService: ChuckService, private http: HttpClient) {}
 
-  ngOnInit() {
-    this.getCategories();
-  }
+  
 
   getCategories() {
     this._chuckService.getCategories().subscribe(
@@ -26,4 +25,16 @@ export class AppComponent {
       () => console.log("done loading categories")
     );
   }
+
+  ngOnInit(): void {
+    /*
+    this.http.get('https://api.github.com/users/seeschweiler').subscribe(data => {
+      console.log(data);
+    });
+    */
+
+    this.getCategories();
+  }
+
+
 }
