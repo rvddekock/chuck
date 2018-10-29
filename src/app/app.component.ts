@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { ChuckService } from "./chuck.service";
 import { HttpClient } from '@angular/common/http';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent {
   title = 'chuck';
   public categories;
+  public joke;
 
   constructor(private _chuckService: ChuckService, private http: HttpClient) {}
 
@@ -23,6 +25,17 @@ export class AppComponent {
       },
       err => console.error(err),
       () => console.log("done loading categories")
+    );
+  }
+
+  getJoke(cat) {
+    this._chuckService.getJoke(cat).subscribe(
+      data => {
+        this.joke = data;
+        console.log(data);
+      },
+      err => console.error(err),
+      () => console.log("done loading joke")
     );
   }
 

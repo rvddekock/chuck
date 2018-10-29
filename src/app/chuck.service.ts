@@ -15,7 +15,7 @@ export class ChuckService {
     return this.http.get("https://api.chucknorris.io/jokes/categories");
   }
 
-  getJokes(cat) {
+  getJoke(cat) {
     return this.http.get("https://api.chucknorris.io/jokes/random?category="+cat);
   }
 }
