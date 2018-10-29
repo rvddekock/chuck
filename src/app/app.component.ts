@@ -1,7 +1,13 @@
 import { Component, OnInit, Inject} from '@angular/core';
 import { ChuckService } from "./chuck.service";
 import { HttpClient } from '@angular/common/http';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
+
+
+export interface DialogData {
+  animal: 'panda' | 'unicorn' | 'lion';
+}
+
 
 @Component({
   selector: 'app-root',
@@ -13,7 +19,7 @@ export class AppComponent {
   public categories;
   public joke;
 
-  constructor(private _chuckService: ChuckService, private http: HttpClient) {}
+  constructor(private _chuckService: ChuckService, private http: HttpClient, public dialog: MatDialog) {}
 
   
 
@@ -39,6 +45,15 @@ export class AppComponent {
     );
   }
 
+  openDialog() {
+    this.dialog.open(DialogDataDialog, {
+      data: {
+        animal: 'panda'
+      }
+    });
+  }
+  
+
   ngOnInit(): void {
     /*
     this.http.get('https://api.github.com/users/seeschweiler').subscribe(data => {
@@ -50,4 +65,13 @@ export class AppComponent {
   }
 
 
+}
+
+
+@Component({
+  selector: 'dialog-data-dialog',
+  templateUrl: 'dialog-data-dialog.html',
+})
+export class DialogDataDialog {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }
