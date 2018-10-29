@@ -5,7 +5,7 @@ import { MatDialog, MAT_DIALOG_DATA} from '@angular/material';
 
 
 export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
+  value: string;
 }
 
 
@@ -18,6 +18,8 @@ export class AppComponent {
   title = 'chuck';
   public categories;
   public joke;
+  public value;
+  public resourcesLoaded = true;
 
   constructor(private _chuckService: ChuckService, private http: HttpClient, public dialog: MatDialog) {}
 
@@ -33,7 +35,7 @@ export class AppComponent {
       () => console.log("done loading categories")
     );
   }
-
+/*
   getJoke(cat) {
     this._chuckService.getJoke(cat).subscribe(
       data => {
@@ -44,13 +46,22 @@ export class AppComponent {
       () => console.log("done loading joke")
     );
   }
-
-  openDialog() {
-    this.dialog.open(DialogDataDialog, {
-      data: {
-        animal: 'panda'
-      }
-    });
+*/
+  openDialog(cat) {
+    this.resourcesLoaded = false;
+    this._chuckService.getJoke(cat).subscribe(
+      data => {
+        this.value = data;
+        console.log(data);
+        this.resourcesLoaded = true;
+        this.dialog.open(DialogDataDialog, {
+          data: {value: this.value}
+        });
+      },
+      err => console.error(err),
+      () => console.log("done loading joke")
+    );
+    
   }
   
 
